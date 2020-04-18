@@ -90,21 +90,21 @@ public class CarrinhoCompras {
         return items;
     }
 
-    private void validaItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
-        if (quantidade <= 0 || valorUnitario.signum() <= 0 || produto == null) {
-            throw new ItemException("Todos os valores do item devem ser preenchidos.");
+    public void validaItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
+        if(produto == null){
+            throw new ItemException("Produto nao encontrado com o código informado.");
+        }
+
+        if(quantidade <= 0){
+            throw new ItemException("A quantidade deve ter um valor inteiro maior que zero.");
+        }
+        
+        if (valorUnitario.signum() <= 0) {
+            throw new ItemException("O preço unitário deve ser um valor maior que zero.");
         }
     }
 
-    private class ItemException extends RuntimeException {
-
-        private static final long serialVersionUID = 1L;
-
-        public ItemException(String message) {
-            super(message);
-        }
-
-    }
+    
 
 
 

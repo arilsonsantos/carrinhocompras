@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class CarrinhoComprasFactory {
 
-    private final Map<String, CarrinhoCompras> clienteCarrinho = new HashMap<>();
+    public final Map<String, CarrinhoCompras> clienteCarrinho = new HashMap<>();
 
     /**
      * Cria e retorna um novo carrinho de compras para o cliente passado como parâmetro.
@@ -21,11 +21,11 @@ public class CarrinhoComprasFactory {
      * @return CarrinhoCompras
      */
     public CarrinhoCompras criar(String identificacaoCliente) {
-        CarrinhoCompras carrinhoCompras = clienteCarrinho.get(identificacaoCliente);
+        CarrinhoCompras carrinhoCompras = clienteCarrinho.get(identificacaoCliente.toUpperCase());
 
         if (carrinhoCompras == null){
             carrinhoCompras = new CarrinhoCompras();
-            clienteCarrinho.put(identificacaoCliente, carrinhoCompras);
+            clienteCarrinho.put(identificacaoCliente.toUpperCase(), carrinhoCompras);
         }
 
         return carrinhoCompras;
@@ -66,6 +66,6 @@ public class CarrinhoComprasFactory {
      * e false caso o cliente não possua um carrinho.
      */
     public boolean invalidar(String identificacaoCliente) {
-        return clienteCarrinho.remove(identificacaoCliente) != null;
+        return clienteCarrinho.remove(identificacaoCliente.toUpperCase()) != null;
     }
 }

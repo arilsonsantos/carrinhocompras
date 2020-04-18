@@ -24,10 +24,6 @@ public class Item {
         this.quantidade = quantidade;
     }
 
-    public Item(Produto produto) {
-        this.produto = produto;
-    }
-
     /**
      * Retorna o produto.
      *
@@ -75,7 +71,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return produto + " " + quantidade + " " + " " + valorUnitario;
+        return "Produto: " + produto + " Quantidade: " + quantidade + " " + " Valor Unitário: " + valorUnitario + " Total: " + getValorTotal();
     }
 
    

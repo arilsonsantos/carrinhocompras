@@ -60,7 +60,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return descricao;
+        return codigo + " - " +  descricao;
     }
 
 }
