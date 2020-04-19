@@ -91,22 +91,6 @@ public class Aplicacao {
         imprimeLinha();
     }
 
-    private static void isConsultarCarrinho(CarrinhoComprasFactory factory, Scanner ler) {
-        System.out.println("\nPara consultar carrinho do cliente, digite o nome do cliente ou S par sair:\n");
-        String clienteConsulta = ler.next();
-
-        if (!clienteConsulta.equalsIgnoreCase("S")) {
-            
-            CarrinhoCompras carrinhoConsulta = factory.criar(clienteConsulta);
-            if (carrinhoConsulta != null && !carrinhoConsulta.getItens().isEmpty()) {
-                carrinhoConsulta.getItens().forEach(System.out::println);
-                System.out.println("VALOR DO PEDIDO: " + carrinhoConsulta.getValorTotal());
-            } else {
-                System.out.println("Carrinho vazio");
-            }
-        }
-    }
-
     private static boolean adicionaItemAoCarrinho(CarrinhoComprasFactory factory, List<Produto> produtos, Scanner ler,
             String cliente) {
         BigDecimal valorUnitario;

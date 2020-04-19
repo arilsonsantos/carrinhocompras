@@ -23,7 +23,7 @@ public class CarrinhoComprasFactory {
     public CarrinhoCompras criar(String identificacaoCliente) {
         CarrinhoCompras carrinhoCompras = clienteCarrinho.get(identificacaoCliente.toUpperCase());
 
-        if (carrinhoCompras == null){
+        if (carrinhoCompras == null) {
             carrinhoCompras = new CarrinhoCompras();
             clienteCarrinho.put(identificacaoCliente.toUpperCase(), carrinhoCompras);
         }
@@ -41,19 +41,12 @@ public class CarrinhoComprasFactory {
      * @return BigDecimal
      */
     public BigDecimal getValorTicketMedio() {
-        BigDecimal somaTotal = clienteCarrinho.values().stream().map(c -> c.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal somaTotal = clienteCarrinho.values().stream().map(c -> c.getValorTotal()).reduce(BigDecimal.ZERO,
+                BigDecimal::add);
 
-        BigDecimal valorTicketMedio = somaTotal.divide(new BigDecimal(clienteCarrinho.size()));
+        BigDecimal valorTicketMedio = somaTotal.divide(new BigDecimal(clienteCarrinho.size()), RoundingMode.FLOOR);
 
-        int valorDecimal = valorTicketMedio.remainder(BigDecimal.ONE).compareTo(new BigDecimal(0.5));
-
-        if (valorDecimal > 0){
-            valorTicketMedio =  valorTicketMedio.setScale(2, RoundingMode.UP);
-        }else if (valorDecimal < 0){
-            valorTicketMedio = valorTicketMedio.setScale(2, RoundingMode.DOWN);
-        }else{
-            valorTicketMedio = valorTicketMedio.setScale(2);
-        }
+        valorTicketMedio = valorTicketMedio.setScale(2, RoundingMode.HALF_EVEN);
         return valorTicketMedio;
     }
 
