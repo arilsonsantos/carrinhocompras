@@ -17,53 +17,21 @@ public class Aplicacao {
         List<Produto> produtos = Arrays.asList(new Produto(1L, "produto 01"), new Produto(2L, "produto 02"),
                 new Produto(3L, "produto 03"));
 
-        BigDecimal valorUnitario = BigDecimal.ZERO;
-        int quantidade = 0;
-
-        //INTERAÇAO
+        //INÍCIO DA INTERAÇAO
         Scanner ler = new Scanner(System.in);
         boolean adicionaMaisCarrinhos = true;
-
+        String cliente = "";
         while (adicionaMaisCarrinhos) {
             System.out.println("Digite o nome do cliente:");
-            String cliente = ler.next();
+            cliente = ler.next();
             factory.criar(cliente);
 
             boolean adicionaMaisItems = true;
             while (adicionaMaisItems) {
-                System.out.println();
-                listaProdutos(produtos);
-
-                System.out.println("\nDigite o código do produto:");
-                codigoProduto = ler.nextLong();
-                Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
-                        .orElse(null);
-
-                System.out.println("Digite o preço:");
-                valorUnitario = ler.nextBigDecimal();
-
-                System.out.println("Digite a quantidade:");
-                quantidade = ler.nextInt();
-
-                factory.criar(cliente).adicionarItem(produto, valorUnitario, quantidade);
-
-                System.out.println("\nDeseja comprar mais?: [S/N]");
-                String adicionaMais = ler.next();
-                adicionaMaisItems = adicionaMais.equalsIgnoreCase("S") ? true : false;
+                adicionaMaisItems = adicionaItemAoCarrinho(factory, produtos, ler, cliente);
             }
 
-            System.out.println("\nPara consultar carrinho do cliente, digite o nome do cliente ou S par sair:\n");
-            String clienteConsulta = ler.next();
-
-            if (!clienteConsulta.equalsIgnoreCase("S")) {
-                CarrinhoCompras carrinhoConsulta = factory.criar(clienteConsulta);
-                if (carrinhoConsulta != null && !carrinhoConsulta.getItens().isEmpty()) {
-                    carrinhoConsulta.getItens().forEach(System.out::println);
-                    System.out.println("VALOR DO PEDIDO: " + carrinhoConsulta.getValorTotal());
-                } else {
-                    System.out.println("Carrinho vazio");
-                }
-            }
+            isConsultarCarrinho(factory, ler);
 
             System.out.println("\nDeseja criar um novo carrinho? [S/N]:");
 
@@ -71,7 +39,28 @@ public class Aplicacao {
             System.out.println();
             adicionaMaisCarrinhos = adicionarCarrinho.equalsIgnoreCase("S") ? true : false;
         }
+
+        isInvalidarCarrinho(factory, cliente, ler);
         
+        resumoDosCarrinhos(factory);
+
+        ler.close();
+
+    }
+
+    private static void isInvalidarCarrinho(CarrinhoComprasFactory factory, String cliente, Scanner ler) {
+        System.out.println("\nDeseja cancelar uma carrinho? [S/N]:");
+        String cancelarCarrinho = ler.next();
+        
+        if (cancelarCarrinho.equalsIgnoreCase("S")){
+            System.out.println("\nDigite o nome do cliente:");
+            String nomeCliente = ler.next();
+                factory.invalidar(nomeCliente);
+        }
+        System.out.println();
+    }
+
+    private static void resumoDosCarrinhos(CarrinhoComprasFactory factory) {
         System.out.println("RESUMO DOS CARRINHOS:");
         System.out.println("---------------------------------------------------------------\n");
         
@@ -83,14 +72,50 @@ public class Aplicacao {
         
         System.out.println("\nMédia do valor dos carrinhos: " + factory.getValorTicketMedio() + "\n");
         System.out.println("---------------------------------------------------------------\n");
+    }
 
-        ler.close();
+    private static void isConsultarCarrinho(CarrinhoComprasFactory factory, Scanner ler) {
+        System.out.println("\nPara consultar carrinho do cliente, digite o nome do cliente ou S par sair:\n");
+        String clienteConsulta = ler.next();
 
+        if (!clienteConsulta.equalsIgnoreCase("S")) {
+            CarrinhoCompras carrinhoConsulta = factory.criar(clienteConsulta);
+            if (carrinhoConsulta != null && !carrinhoConsulta.getItens().isEmpty()) {
+                carrinhoConsulta.getItens().forEach(System.out::println);
+                System.out.println("VALOR DO PEDIDO: " + carrinhoConsulta.getValorTotal());
+            } else {
+                System.out.println("Carrinho vazio");
+            }
+        }
+    }
+
+    private static boolean adicionaItemAoCarrinho(CarrinhoComprasFactory factory, List<Produto> produtos, Scanner ler, String cliente) {
+        BigDecimal valorUnitario;
+        int quantidade;
+        
+        System.out.println();
+        listaProdutos(produtos);
+
+        System.out.println("\nDigite o código do produto:");
+        codigoProduto = ler.nextLong();
+        Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
+                .orElse(null);
+
+        System.out.println("Digite o preço:");
+        valorUnitario = ler.nextBigDecimal();
+
+        System.out.println("Digite a quantidade:");
+        quantidade = ler.nextInt();
+
+        factory.criar(cliente).adicionarItem(produto, valorUnitario, quantidade);
+
+        System.out.println("\nDeseja comprar mais?: [S/N]");
+        String adicionaMais = ler.next();
+        return adicionaMais.equalsIgnoreCase("S") ? true : false;
     }
 
     private static void listaProdutos(List<Produto> produtos) {
         produtos.forEach(System.out::println);
-
     }
 
 }
