@@ -42,12 +42,13 @@ public class Aplicacao {
             adicionaMaisCarrinhos = adicionarCarrinho.equalsIgnoreCase("S") ? true : false;
         }
 
+        resumoDosCarrinhos(factory);
+        
         isInvalidarCarrinho(factory, cliente, ler, invalidarCarrinho);
 
         resumoDosCarrinhos(factory);
 
         ler.close();
-
     }
 
     private static void isInvalidarCarrinho(CarrinhoComprasFactory factory, String cliente, Scanner ler, boolean primeiraPergunta) {
