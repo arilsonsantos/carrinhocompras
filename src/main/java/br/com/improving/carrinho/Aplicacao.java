@@ -33,7 +33,7 @@ public class Aplicacao {
                 adicionaMaisItems = adicionaItemAoCarrinho(factory, produtos, ler, cliente);
             }
 
-            isConsultarCarrinho(factory, ler);
+            //isConsultarCarrinho(factory, ler);
 
             System.out.println("\nDeseja criar um novo carrinho? [S/N]:");
 
@@ -43,7 +43,7 @@ public class Aplicacao {
         }
 
         resumoDosCarrinhos(factory);
-        
+
         isInvalidarCarrinho(factory, cliente, ler, invalidarCarrinho);
 
         resumoDosCarrinhos(factory);
@@ -96,6 +96,7 @@ public class Aplicacao {
         String clienteConsulta = ler.next();
 
         if (!clienteConsulta.equalsIgnoreCase("S")) {
+            
             CarrinhoCompras carrinhoConsulta = factory.criar(clienteConsulta);
             if (carrinhoConsulta != null && !carrinhoConsulta.getItens().isEmpty()) {
                 carrinhoConsulta.getItens().forEach(System.out::println);
