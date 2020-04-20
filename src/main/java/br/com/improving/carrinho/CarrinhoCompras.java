@@ -97,6 +97,7 @@ public class CarrinhoCompras {
 
         if(quantidade <= 0){
             throw new ItemException("A quantidade deve ter um valor inteiro maior que zero.");
+
         }
         
         if (valorUnitario.signum() <= 0) {
