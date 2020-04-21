@@ -13,5 +13,11 @@ Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução
 
  <kbd>mvn package exec:java</kbd> 
 
+
 #### Fluxograma:
 ![Logo](./documentacao/carrinho-de-compras-retrato.png)
+
+### Exemplos
+
+![v-01](./documentacao/01-compra-1-carrinho.gif)
+
