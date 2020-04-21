@@ -22,20 +22,20 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
-public class Aplicacao {
-    private static final List<Produto> produtos = ProdutoDbUtils.findAll();
+public class Compra implements ICompra {
+    private  final List<Produto> produtos = ProdutoDbUtils.findAll();
 
-    private static Long codigoProduto = null;
-    private static String cliente = "";
-    private static int sessao = 30;
+    private  Long codigoProduto = null;
+    private  String cliente = "";
+    private  int sessao = 30;
 
-    public static void main(final String[] args) {
+    public void executar() {
         final CarrinhoComprasFactory factory = new CarrinhoComprasFactory();
         final Scanner ler = new Scanner(System.in);
 
-        imprimirMensagem("Digite o tempo, em segundos, da sessão ou digite zero para o manter o valor igual a 30.");
+        imprimirMensagem("Digite o tempo da sessão (em segundos) ou digite zero para o manter o valor padrão igual a 30.");
         
-        sessao = ler.nextInt();
+        sessao = ler.nextInt() == 0 ? 30 : sessao;
 
         iniciarCompra(factory, ler);
         cancelarOuFinalizarCompra(factory, ler);
@@ -44,7 +44,7 @@ public class Aplicacao {
         ler.close();
     }
 
-    private static void iniciarCompra(final CarrinhoComprasFactory factory, final Scanner ler) {
+    private  void iniciarCompra(final CarrinhoComprasFactory factory, final Scanner ler) {
         linhaEmBranco();
         imprimirMensagem(DIGITE_NOME_CLIENTE);
 
@@ -55,7 +55,7 @@ public class Aplicacao {
         linhaEmBranco();
     }
 
-    private static void cancelarOuFinalizarCompra(final CarrinhoComprasFactory factory, final Scanner ler) {
+    private  void cancelarOuFinalizarCompra(final CarrinhoComprasFactory factory, final Scanner ler) {
         if (factory.criar(cliente).getItens().isEmpty()){
             factory.invalidar(cliente);
             return;
@@ -77,7 +77,7 @@ public class Aplicacao {
         }
     }
 
-    private static void isCancelarCarrinho(final CarrinhoComprasFactory factory, final int cancelarCarrinho,
+    private  void isCancelarCarrinho(final CarrinhoComprasFactory factory, final int cancelarCarrinho,
             final Scanner ler) {
         if (cancelarCarrinho == 2) {
             factory.invalidar(cliente);
@@ -85,7 +85,7 @@ public class Aplicacao {
         }
     }
 
-    private static void resumoDosCarrinhos(final CarrinhoComprasFactory factory) {
+    private  void resumoDosCarrinhos(final CarrinhoComprasFactory factory) {
         linhaEmBranco();
         linhaTracejada();
         imprimirMensagem(RESUMO_DOS_CARRINHOS);
@@ -109,7 +109,7 @@ public class Aplicacao {
         linhaTracejada();
     }
 
-    private static void adicionaItemAoCarrinho(final CarrinhoComprasFactory factory, final Scanner ler,
+    private  void adicionaItemAoCarrinho(final CarrinhoComprasFactory factory, final Scanner ler,
             final String cliente) {
 
         linhaEmBranco();
@@ -139,7 +139,7 @@ public class Aplicacao {
         continuarCompra(factory, ler, cliente);
     }
 
-    private static void continuarCompra(final CarrinhoComprasFactory factory, final Scanner ler, final String cliente) {
+    private  void continuarCompra(final CarrinhoComprasFactory factory, final Scanner ler, final String cliente) {
         imprimirMensagem(DESEJA_CONTINUAR_COMPRANDO);
         LocalTime inicioSessao = LocalTime.now();
         String adicionaMais = ler.next();
@@ -164,7 +164,7 @@ public class Aplicacao {
         }
     }
 
-    private static boolean isSessaoExpirou(LocalTime inicioSessao, final CarrinhoComprasFactory factory,
+    private  boolean isSessaoExpirou(LocalTime inicioSessao, final CarrinhoComprasFactory factory,
             final String cliente, final Scanner ler) {
         if (Duration.between(inicioSessao, LocalTime.now()).getSeconds() > sessao) {
             if (factory.clienteCarrinho.isEmpty()) {
@@ -184,7 +184,7 @@ public class Aplicacao {
         return false;
     }
 
-    private static void isSairDaAplicacao(final CarrinhoComprasFactory factory, final Scanner ler) {
+    private  void isSairDaAplicacao(final CarrinhoComprasFactory factory, final Scanner ler) {
         linhaEmBranco();
         imprimirMensagem(SAIR_DA_APLICACAO);
 
@@ -199,26 +199,26 @@ public class Aplicacao {
         }
     }
 
-    private static void listaProdutos(final List<Produto> produtos) {
+    private  void listaProdutos(final List<Produto> produtos) {
         produtos.forEach(System.out::println);
     }
 
-    private static void linhaTracejada() {
+    private  void linhaTracejada() {
         System.out.println("---------------------------------------------------------------");
     }
 
-    private static void linhaEmBranco() {
+    private  void linhaEmBranco() {
         System.out.println();
     }
 
-    private static void imprimirMensagem(final String mensagem) {
+    private  void imprimirMensagem(final String mensagem) {
         System.out.println(mensagem);
     }
-    private static void imprimirMensagem(final MensagemEnum mensagemEnum) {
+    private  void imprimirMensagem(final MensagemEnum mensagemEnum) {
         System.out.println(mensagemEnum.getDescricao());
     }
 
-    private static void imprimirMensagem(final MensagemEnum mensagemEnum, String complemento) {
+    private  void imprimirMensagem(final MensagemEnum mensagemEnum, String complemento) {
         System.out.println(mensagemEnum.getDescricao() + complemento);
     }
 
