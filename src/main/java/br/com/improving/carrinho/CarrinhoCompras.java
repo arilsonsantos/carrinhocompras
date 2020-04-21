@@ -29,17 +29,16 @@ public class CarrinhoCompras {
 
     private List<Item> items = new ArrayList<>();
 
-
     public void adicionarItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
         validaItem(produto, valorUnitario, quantidade);
 
         Optional<Item> itemExistente = items.stream().filter(i -> i.getProduto().equals(produto)).findFirst();
 
-        if (itemExistente.isPresent()){
+        if (itemExistente.isPresent()) {
             Item newItem = itemExistente.get();
             newItem.setQuantidade(newItem.getQuantidade() + quantidade);
             newItem.setValorUnitario(valorUnitario);
-        }else{
+        } else {
             items.add(new Item(produto, valorUnitario, quantidade));
         }
     }
@@ -91,22 +90,18 @@ public class CarrinhoCompras {
     }
 
     public void validaItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
-        if(produto == null){
-            throw new ItemException("Produto nao encontrado com o código informado.");
+        if (produto == null) {
+            throw new ItemException("ERRO: [Produto nao encontrado com o código informado]");
         }
 
-        if(quantidade <= 0){
-            throw new ItemException("A quantidade deve ter um valor inteiro maior que zero.");
+        if (quantidade <= 0) {
+            throw new ItemException("ERRO: [A quantidade deve ter um valor inteiro maior que zero]");
 
         }
-        
+
         if (valorUnitario.signum() <= 0) {
-            throw new ItemException("O preço unitário deve ser um valor maior que zero.");
+            throw new ItemException("ERRO: [O preço unitário deve ser um valor maior que zero]");
         }
     }
-
-    
-
-
 
 }

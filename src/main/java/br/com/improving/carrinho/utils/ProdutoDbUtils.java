@@ -1,7 +1,9 @@
-package br.com.improving.carrinho;
+package br.com.improving.carrinho.utils;
 
 import java.util.Arrays;
 import java.util.List;
+
+import br.com.improving.carrinho.Produto;
 
 public final class ProdutoDbUtils {
 

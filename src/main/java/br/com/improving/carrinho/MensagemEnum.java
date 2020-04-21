@@ -13,9 +13,10 @@ public enum MensagemEnum {
     DIGITE_CODIGO_DO_PRODUTO("Digite o código do produto: "), 
     DIGITE_O_PRECO("Digite o preço: "),
     DIGITE_A_QUANTIDADE("Digite a quantidade: "), 
-    DESEJA_CONTINUAR_COMPRANDO("Deseja continuar comprando?: [S/N]: "),
+    DESEJA_CONTINUAR_COMPRANDO("Deseja colocar mais produtos neste carrinho?: [S/N]: "),
     RESUMO_CARRINHO_CLIENTE("RESUMO DO CARRINHO DO(A) CLIENTE: "), 
     SESSAO_EXPIROU("Sessão expirou!"),
+    ERRO_VALOR_UNITARIO("ERRO: [O valor unitário deve conter vírgular como separador decimal - (9,99)]"),
     SAIR_DA_APLICACAO("Sair da aplicação? [S/N]: ");
 
     private String descricao;
