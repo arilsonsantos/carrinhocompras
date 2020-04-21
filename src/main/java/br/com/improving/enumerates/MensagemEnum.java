@@ -1,6 +1,8 @@
-package br.com.improving.carrinho;
+package br.com.improving.enumerates;
 
-
+/**
+ * Enum com mensagens diversas
+ */
 public enum MensagemEnum {
     CONFIGURACAO_SESSAO("Digite o tempo da sessão (em segundos) ou digite zero para o manter o valor padrão igual a 30."),
     VALOR_INCORRETO_DA_SESSAO("O valor inserido não está correo. A sessão teráo o tempo padrão, 30s. "),
@@ -20,7 +22,6 @@ public enum MensagemEnum {
     DESEJA_CONTINUAR_COMPRANDO("Deseja colocar mais produtos neste carrinho?: [S/N]: "),
     RESUMO_CARRINHO_CLIENTE("RESUMO DO CARRINHO DO(A) CLIENTE: "), 
     SESSAO_EXPIROU("Sessão expirou!"),
-    ERRO_VALOR_UNITARIO("ERRO: [O valor unitário deve conter vírgular como separador decimal - (9,99)]"),
     SAIR_DA_APLICACAO("Sair da aplicação? [S/N]: ");
 
     private String descricao;

@@ -5,3 +5,18 @@ Você poderá criar novos atributos e métodos, mas é proibido mover as classes
 A prova deve ser resolvida utilizando obrigatoriamente Java 8. Não será necessário implementar nenhum tipo de interface gráfica ou mecanismo de persistência.
 
 Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução seja aprovada. Sua prova precisa compilar via Maven, impreterivelmente - não basta rodar apenas via sua IDE.
+
+---
+### Instruções de uso da applicação Carrinho de Compras.
+
+##### 1) No diretório da aplicação, digite a instrução abaixo:
+
+ <kbd>mvn package exec:java</kbd> 
+
+!teste1  
+!!teste2  
+!!!teste3  
+!!!!teste4  
+
+Este é um {c:#B81365}texto colorido com hexadecimal{/c} 
+[size=50][fa=check-circle /] Tamanho 50[/size]

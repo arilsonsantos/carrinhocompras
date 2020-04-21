@@ -3,6 +3,9 @@ package br.com.improving.carrinho;
 import br.com.improving.carrinho.service.CompraService;
 import br.com.improving.carrinho.service.ICompra;
 
+/**
+ * Start da aplicaçao
+ */
 public class CarrinhoApp {
 
     public static void main(String[] args) {

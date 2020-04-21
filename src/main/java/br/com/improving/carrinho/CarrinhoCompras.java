@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.improving.enumerates.MensagemErroEnum;
+
 /**
  * Classe que representa o carrinho de compras de um cliente.
  */
@@ -90,22 +92,29 @@ public class CarrinhoCompras {
         return items;
     }
 
+    /**
+     * Valida entrada de um novo item
+     * 
+     * @param produto
+     * @param valorUnitario
+     * @param quantidade
+     */
     public void validaItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
         validaProduto(produto);
 
         if (quantidade <= 0) {
-            throw new ItemException("ERRO: [A quantidade deve ter um valor inteiro maior que zero]");
+            throw new ItemException(MensagemErroEnum.QUANTIDADE_INVALIDA);
 
         }
 
         if (valorUnitario.signum() <= 0) {
-            throw new ItemException("ERRO: [O preço unitário deve ser um valor maior que zero]");
+            throw new ItemException(MensagemErroEnum.PRECO_UNITARIO_INVALIDO);
         }
     }
 
     public void validaProduto(Produto produto) {
         if (produto == null) {
-            throw new ItemException("ERRO: [Produto nao encontrado com o código informado]");
+            throw new ItemException(MensagemErroEnum.PRODUTO_NAO_ENCONTRADO);
         }
     }
 

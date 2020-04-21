@@ -1,28 +1,27 @@
 package br.com.improving.carrinho.service;
 
-import static br.com.improving.carrinho.MensagemEnum.CONFIGURACAO_SESSAO;
-import static br.com.improving.carrinho.MensagemEnum.CONFIRMAR_CANCELAR_COMPRA;
-import static br.com.improving.carrinho.MensagemEnum.DESEJA_CONTINUAR_COMPRANDO;
-import static br.com.improving.carrinho.MensagemEnum.DIGITE_A_QUANTIDADE;
-import static br.com.improving.carrinho.MensagemEnum.DIGITE_CODIGO_DO_PRODUTO;
-import static br.com.improving.carrinho.MensagemEnum.DIGITE_NOME_CLIENTE;
-import static br.com.improving.carrinho.MensagemEnum.DIGITE_O_PRECO;
-import static br.com.improving.carrinho.MensagemEnum.ERRO_VALOR_UNITARIO;
-import static br.com.improving.carrinho.MensagemEnum.MEDIA_DO_VALOR_DOS_CARRINHOS;
-import static br.com.improving.carrinho.MensagemEnum.NAO_HA_CARRINHO_COM_COMPRAS;
-import static br.com.improving.carrinho.MensagemEnum.PARA_ALTERAR_2;
-import static br.com.improving.carrinho.MensagemEnum.PARA_CANCELAR_3;
-import static br.com.improving.carrinho.MensagemEnum.PARA_CONFIRMAR_1;
-import static br.com.improving.carrinho.MensagemEnum.RESUMO_DOS_CARRINHOS;
-import static br.com.improving.carrinho.MensagemEnum.SAIR_DA_APLICACAO;
-import static br.com.improving.carrinho.MensagemEnum.SESSAO_EXPIROU;
-import static br.com.improving.carrinho.MensagemEnum.TOTAL_DO_PEDIDO;
-import static br.com.improving.carrinho.MensagemEnum.VALOR_INCORRETO_DA_SESSAO;
 import static br.com.improving.carrinho.utils.CompraUtils.imprimirMensagem;
 import static br.com.improving.carrinho.utils.CompraUtils.linhaEmBranco;
 import static br.com.improving.carrinho.utils.CompraUtils.linhaTracejada;
 import static br.com.improving.carrinho.utils.CompraUtils.listaProdutos;
 import static br.com.improving.carrinho.utils.CompraUtils.prompt;
+import static br.com.improving.enumerates.MensagemEnum.CONFIGURACAO_SESSAO;
+import static br.com.improving.enumerates.MensagemEnum.CONFIRMAR_CANCELAR_COMPRA;
+import static br.com.improving.enumerates.MensagemEnum.DESEJA_CONTINUAR_COMPRANDO;
+import static br.com.improving.enumerates.MensagemEnum.DIGITE_A_QUANTIDADE;
+import static br.com.improving.enumerates.MensagemEnum.DIGITE_CODIGO_DO_PRODUTO;
+import static br.com.improving.enumerates.MensagemEnum.DIGITE_NOME_CLIENTE;
+import static br.com.improving.enumerates.MensagemEnum.DIGITE_O_PRECO;
+import static br.com.improving.enumerates.MensagemEnum.MEDIA_DO_VALOR_DOS_CARRINHOS;
+import static br.com.improving.enumerates.MensagemEnum.NAO_HA_CARRINHO_COM_COMPRAS;
+import static br.com.improving.enumerates.MensagemEnum.PARA_ALTERAR_2;
+import static br.com.improving.enumerates.MensagemEnum.PARA_CANCELAR_3;
+import static br.com.improving.enumerates.MensagemEnum.PARA_CONFIRMAR_1;
+import static br.com.improving.enumerates.MensagemEnum.RESUMO_DOS_CARRINHOS;
+import static br.com.improving.enumerates.MensagemEnum.SAIR_DA_APLICACAO;
+import static br.com.improving.enumerates.MensagemEnum.SESSAO_EXPIROU;
+import static br.com.improving.enumerates.MensagemEnum.TOTAL_DO_PEDIDO;
+import static br.com.improving.enumerates.MensagemEnum.VALOR_INCORRETO_DA_SESSAO;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -33,10 +32,14 @@ import java.util.Scanner;
 
 import br.com.improving.carrinho.CarrinhoComprasFactory;
 import br.com.improving.carrinho.ItemException;
-import br.com.improving.carrinho.MensagemEnum;
 import br.com.improving.carrinho.Produto;
 import br.com.improving.carrinho.utils.ProdutoDbUtils;
+import br.com.improving.enumerates.MensagemEnum;
+import br.com.improving.enumerates.MensagemErroEnum;
 
+/*
+* Classe responsável por realizar toda a movimentação de compras de um ou mais carrinhos.
+*/
 public class CompraService implements ICompra {
     private static final int ALTERAR_CARRINHO_2 = 2;
     private static final int CANCELAR_CARRINHO_3 = 3;
@@ -44,6 +47,9 @@ public class CompraService implements ICompra {
 
     private int sessao = 30;
 
+    /**
+    * Configuração da sessão e invocação do início das compras.
+    */
     public void executar() {
         CarrinhoComprasFactory factory = new CarrinhoComprasFactory();
         Scanner ler = prompt();
@@ -63,6 +69,11 @@ public class CompraService implements ICompra {
         ler.close();
     }
 
+    /**
+     * Início das compras, onde o carrinho de compras é criado e associado a um cliente.
+     * 
+     * @param factory
+     */
     private void iniciarCompra(final CarrinhoComprasFactory factory) {
         linhaEmBranco();
         imprimirMensagem(DIGITE_NOME_CLIENTE);
@@ -75,6 +86,12 @@ public class CompraService implements ICompra {
         isSairDaAplicacao(factory);
     }
 
+    /**
+     * Adiciona item(s) ao carrinho de compras.
+     * 
+     * @param factory
+     * @param cliente
+     */
     private void adicionarItem(CarrinhoComprasFactory factory, String cliente) {
         linhaEmBranco();
         listaProdutos(produtos);
@@ -101,7 +118,7 @@ public class CompraService implements ICompra {
             adicionarItem(factory, cliente);
         } catch (InputMismatchException ex) {
             linhaEmBranco();
-            imprimirMensagem(ERRO_VALOR_UNITARIO);
+            imprimirMensagem(MensagemErroEnum.PRECO_UNITARIO_INVALIDO);
             adicionarItem(factory, cliente);
         }
 
@@ -109,6 +126,12 @@ public class CompraService implements ICompra {
 
     }
 
+    /**
+     * Opções para confirmar, alterar ou cancelar uma compra.
+     * 
+     * @param factory
+     * @param cliente
+     */
     private void cancelarOuFinalizarCompra(CarrinhoComprasFactory factory, String cliente) {
         if (factory.criar(cliente).getItens().isEmpty()) {
             factory.invalidar(cliente);
@@ -134,6 +157,12 @@ public class CompraService implements ICompra {
         }
     }
 
+    /**
+     * Remove item(s) do carrinho de compras.
+     * 
+     * @param factory
+     * @param cliente
+     */
     private void removerItem(CarrinhoComprasFactory factory, String cliente) {
         linhaEmBranco();
         listaProdutos(produtos);
@@ -164,6 +193,11 @@ public class CompraService implements ICompra {
 
     }
 
+    /**
+     * Antes de sair da aplicação, um resumo das compras será exibido.
+     * 
+     * @param factory
+     */
     private void resumoDosCarrinhos(CarrinhoComprasFactory factory) {
 
         linhaEmBranco();
@@ -189,6 +223,12 @@ public class CompraService implements ICompra {
         linhaTracejada();
     }
 
+    /**
+     * Questiona o cliente se quer continuar adicionando item(s) ao carrinho de compras.
+     * 
+     * @param factory
+     * @param cliente
+     */
     private void continuarCompra(CarrinhoComprasFactory factory, String cliente) {
         imprimirMensagem(DESEJA_CONTINUAR_COMPRANDO);
         LocalTime inicioSessao = LocalTime.now();
@@ -203,6 +243,14 @@ public class CompraService implements ICompra {
         }
     }
 
+    /**
+     * Verifica se a sessão do usuário expirou.
+     * 
+     * @param inicioSessao
+     * @param factory
+     * @param cliente
+     * @return boolean
+     */
     private boolean isSessaoExpirou(LocalTime inicioSessao, final CarrinhoComprasFactory factory,
             final String cliente) {
         if (Duration.between(inicioSessao, LocalTime.now()).getSeconds() > sessao) {
@@ -222,6 +270,13 @@ public class CompraService implements ICompra {
         return false;
     }
 
+    /**
+     * Pergunta ao usuário se deseja sair da aplicação.
+     * 
+     * Se não, deve voltar ao início das compras.
+     * 
+     * @param factory
+     */
     private void isSairDaAplicacao(CarrinhoComprasFactory factory) {
         linhaEmBranco();
         imprimirMensagem(SAIR_DA_APLICACAO);
