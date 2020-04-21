@@ -65,4 +65,4 @@ O carrinho do João é chamado novamente
 Adicionado mais um para o produto 1, com preço diferente da primeira compra
 Fecha carrinho 
 Sai da aplicação  
-![v-04](./documentacao/04-carrinho-mesmo-cliente.gif.gif)
+![v-04](./documentacao/04-carrinho-mesmo-cliente.gif)
