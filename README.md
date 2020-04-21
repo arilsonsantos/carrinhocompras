@@ -66,3 +66,19 @@ Adicionado mais um para o produto 1, com preço diferente da primeira compra
 Fecha carrinho 
 Sai da aplicação  
 ![v-04](./documentacao/04-carrinho-mesmo-cliente.gif)
+
+
+Inicia uma compra 
+Adiciona o produto 1 ao carrinho do Joao  
+Adiciona o produto 2 ao carrinho do Joao
+Remove o produto 1 
+Fecha carrinho 
+Novo carrinho é adicionado  
+Adiciona o produto 1 ao carrinho da Maria 
+Adiciona o produto 2 ao carrinho da Maria  
+Remove os produtos 1 e 2 do carrinho da Maria
+Fecha carrinho 
+O carrinho da Maria é descartado por estar vazio   
+Restou o carrinho do Joao com o prdouto 1
+Sai da aplicação  
+![v-05](./documentacao/05-remover-itens-carrinho-vazio.gif)
