@@ -4,14 +4,15 @@ Você poderá criar novos atributos e métodos, mas é proibido mover as classes
 
 A prova deve ser resolvida utilizando obrigatoriamente Java 8. Não será necessário implementar nenhum tipo de interface gráfica ou mecanismo de persistência.
 
-Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução seja aprovada. Sua prova precisa compilar via Maven, impreterivelmente - não basta rodar apenas via sua IDE.
+Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução seja aprovada. Sua prova precisa compilar via Maven, impreterivelmente - não basta rodar apenas via sua IDE.  
+
 
 ---
-### Instruções para a execução da aplicação Carrinho de Compras.
+  
+  
+**Documentação e instruções para uso da aplicação Carrinho de Compras**
 
-##### 1) No diretório da aplicação, digite a instrução abaixo e siga as instruções:
 
- <kbd>mvn package exec:java</kbd> 
 
 
 #### Fluxograma:
@@ -19,7 +20,11 @@ Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução
 
 ![Logo](./documentacao/carrinho-de-compras-retrato.png)
 
-### Exemplos
+---
+
+## Exemplos  
+
+#### 1. Carrinho com dois itens cadastrados com validação do preço unitário  
 Inicia uma compra  
 Adiciona o produto 1 ao carrinho  
 Adiciona novamente o produto 1, com preço inválido (exceção lançada)  
@@ -29,7 +34,7 @@ Fecha o carrinho
 Sai da aplicação  
 ![v-01](./documentacao/01-compra-1-carrinho.gif)
 
-
+#### 2. Executando com a sessão configurada para 5 segundos  
 Inicia uma compra (sessão de 5 segundos)  
 Adiciona o produto 1 ao carrinho  
 Sessão expira  
@@ -40,7 +45,7 @@ Sessao expira novamente
 Sai da aplicação  
 ![v-02](./documentacao/02-sessao-expirando.gif)
 
-
+#### 3. Carrinho com dois itens cadastrados com validação do preço unitário  
 Inicia com valor inválido par a sessão, o valor  30 é assumido  
 Inicia uma compra  
 Adiciona 02 itens ao carrinho  
@@ -54,7 +59,7 @@ Cancela a compra
 Sai da aplicação  
 ![v-03](./documentacao/03-adiciona-3-carrinhos-cancela-1.gif)
 
-
+#### 4. Editando uma compra fechada anteriormente na mesma sessão 
 Inicia uma compra 
 Adiciona o produto 1 ao carrinho do Joao   
 Fecha carrinho 
@@ -67,7 +72,7 @@ Fecha carrinho
 Sai da aplicação  
 ![v-04](./documentacao/04-carrinho-mesmo-cliente.gif)
 
-
+#### 5. Removendo produtos do carrinho 
 Inicia uma compra  
 Adiciona o produto 1 ao carrinho do Joao  
 Adiciona o produto 2 ao carrinho do Joao  
@@ -82,3 +87,14 @@ O carrinho da Maria é descartado por estar vazio
 Restou o carrinho do Joao com o prdouto 1  
 Sai da aplicação  
 ![v-05](./documentacao/05-remover-itens-carrinho-vazio.gif)
+
+
+---
+
+### Instruções para a execução da aplicação Carrinho de Compras.
+
+##### 1) Para primeira execução, no diretório da aplicação, digite a instrução abaixo:  
+ <kbd>mvn package exec:java</kbd> 
+
+##### 2) Para as próximas execuções, no diretório da aplicação, digite a instrução abaixo:  
+ <kbd>mvn exec:java</kbd> 
