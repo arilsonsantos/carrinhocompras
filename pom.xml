@@ -29,7 +29,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>br.com.improving.carrinho.Aplicacao</mainClass>
+                    <mainClass>br.com.improving.carrinho.CarrinhoApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

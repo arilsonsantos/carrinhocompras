@@ -84,7 +84,7 @@ public class CompraService implements ICompra {
         Long codigoProduto = prompt().nextLong();
 
         try {
-            final Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
+            Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
                     .orElse(null);
 
             imprimirMensagem(DIGITE_O_PRECO);
@@ -130,9 +130,7 @@ public class CompraService implements ICompra {
             factory.invalidar(cliente);
             linhaEmBranco();
         } else if (acaoNoCarrinho == ALTERAR_CARRINHO_2) {
-
             removerItem(factory, cliente);
-
         }
     }
 
@@ -144,7 +142,7 @@ public class CompraService implements ICompra {
         imprimirMensagem(DIGITE_CODIGO_DO_PRODUTO);
 
         Long codigoProduto = prompt().nextLong();
-        final Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
+        Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
                 .orElse(null);
         try {
             factory.criar(cliente).removerItem(produto);
@@ -153,6 +151,7 @@ public class CompraService implements ICompra {
         }
 
         if (!factory.criar(cliente).getItens().isEmpty()) {
+            linhaEmBranco();
             imprimirMensagem(MensagemEnum.REMOVER_ITEM);
             String resposta = prompt().next();
 
