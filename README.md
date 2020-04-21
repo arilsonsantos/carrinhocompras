@@ -38,7 +38,7 @@ Novo carrinho é adicionado
 Adiciona 02 itens ao carrinho  
 Sessao expira novamente  
 Sai da aplicação  
-![v-01](./documentacao/02-sessao-expirando.gif)
+![v-02](./documentacao/02-sessao-expirando.gif)
 
 
 Inicia com valor inválido par a sessão, o valor  30 é assumido  
@@ -52,4 +52,17 @@ Inicia nova compra
 Adiciona 01 item ao carrinho  
 Cancela a compra  
 Sai da aplicação  
-![v-01](./documentacao/03-adiciona-3-carrinhos-cancela-1.gif)
+![v-03](./documentacao/03-adiciona-3-carrinhos-cancela-1.gif)
+
+
+Inicia uma compra 
+Adiciona o produto 1 ao carrinho do Joao   
+Fecha carrinho 
+Novo carrinho é adicionado  
+Adiciona o produto 2 ao carrinho da Maria  
+Fecha carrinho  
+O carrinho do João é chamado novamente  
+Adicionado mais um para o produto 1, com preço diferente da primeira compra
+Fecha carrinho 
+Sai da aplicação  
+![v-04](./documentacao/04-carrinho-mesmo-cliente.gif.gif)
