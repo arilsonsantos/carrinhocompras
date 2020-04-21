@@ -1,5 +1,6 @@
 package br.com.improving.carrinho.service;
 
+import static br.com.improving.carrinho.MensagemEnum.CONFIGURACAO_SESSAO;
 import static br.com.improving.carrinho.MensagemEnum.CONFIRMAR_CANCELAR_COMPRA;
 import static br.com.improving.carrinho.MensagemEnum.DESEJA_CONTINUAR_COMPRANDO;
 import static br.com.improving.carrinho.MensagemEnum.DIGITE_A_QUANTIDADE;
@@ -9,12 +10,14 @@ import static br.com.improving.carrinho.MensagemEnum.DIGITE_O_PRECO;
 import static br.com.improving.carrinho.MensagemEnum.ERRO_VALOR_UNITARIO;
 import static br.com.improving.carrinho.MensagemEnum.MEDIA_DO_VALOR_DOS_CARRINHOS;
 import static br.com.improving.carrinho.MensagemEnum.NAO_HA_CARRINHO_COM_COMPRAS;
-import static br.com.improving.carrinho.MensagemEnum.PARA_CANCELAR_2;
+import static br.com.improving.carrinho.MensagemEnum.PARA_ALTERAR_2;
+import static br.com.improving.carrinho.MensagemEnum.PARA_CANCELAR_3;
 import static br.com.improving.carrinho.MensagemEnum.PARA_CONFIRMAR_1;
 import static br.com.improving.carrinho.MensagemEnum.RESUMO_DOS_CARRINHOS;
 import static br.com.improving.carrinho.MensagemEnum.SAIR_DA_APLICACAO;
 import static br.com.improving.carrinho.MensagemEnum.SESSAO_EXPIROU;
 import static br.com.improving.carrinho.MensagemEnum.TOTAL_DO_PEDIDO;
+import static br.com.improving.carrinho.MensagemEnum.VALOR_INCORRETO_DA_SESSAO;
 import static br.com.improving.carrinho.utils.CompraUtils.imprimirMensagem;
 import static br.com.improving.carrinho.utils.CompraUtils.linhaEmBranco;
 import static br.com.improving.carrinho.utils.CompraUtils.linhaTracejada;
@@ -30,11 +33,13 @@ import java.util.Scanner;
 
 import br.com.improving.carrinho.CarrinhoComprasFactory;
 import br.com.improving.carrinho.ItemException;
+import br.com.improving.carrinho.MensagemEnum;
 import br.com.improving.carrinho.Produto;
 import br.com.improving.carrinho.utils.ProdutoDbUtils;
 
 public class CompraService implements ICompra {
-    private static final int CANCELAR_CARRINHO_2 = 2;
+    private static final int ALTERAR_CARRINHO_2 = 2;
+    private static final int CANCELAR_CARRINHO_3 = 3;
     private static final List<Produto> produtos = ProdutoDbUtils.findAll();
 
     private int sessao = 30;
@@ -43,14 +48,13 @@ public class CompraService implements ICompra {
         CarrinhoComprasFactory factory = new CarrinhoComprasFactory();
         Scanner ler = prompt();
 
-        imprimirMensagem(
-                "Digite o tempo da sessão (em segundos) ou digite zero para o manter o valor padrão igual a 30.");
+        imprimirMensagem(CONFIGURACAO_SESSAO);
 
         try {
             sessao = ler.nextInt();
             sessao = sessao == 0 ? 30 : sessao;
         } catch (InputMismatchException e) {
-            imprimirMensagem("O valor inserido não está correo. A sessão teráo o tempo padrão, 30s. ");
+            imprimirMensagem(VALOR_INCORRETO_DA_SESSAO);
         }
 
         iniciarCompra(factory);
@@ -116,18 +120,52 @@ public class CompraService implements ICompra {
         linhaEmBranco();
 
         imprimirMensagem(PARA_CONFIRMAR_1);
-        imprimirMensagem(PARA_CANCELAR_2);
+        imprimirMensagem(PARA_ALTERAR_2);
+        imprimirMensagem(PARA_CANCELAR_3);
 
-        int cancelarCarrinho = prompt().nextInt();
+        int acaoNoCarrinho = prompt().nextInt();
         boolean sessaoExpirou = isSessaoExpirou(inicioSessao, factory, cliente);
 
-        if (cancelarCarrinho == CANCELAR_CARRINHO_2 || sessaoExpirou) {
+        if (acaoNoCarrinho == CANCELAR_CARRINHO_3 || sessaoExpirou) {
             factory.invalidar(cliente);
             linhaEmBranco();
+        } else if (acaoNoCarrinho == ALTERAR_CARRINHO_2) {
+
+            removerItem(factory, cliente);
+
         }
     }
 
-    private void resumoDosCarrinhos(final CarrinhoComprasFactory factory) {
+    private void removerItem(CarrinhoComprasFactory factory, String cliente) {
+        linhaEmBranco();
+        listaProdutos(produtos);
+        linhaEmBranco();
+
+        imprimirMensagem(DIGITE_CODIGO_DO_PRODUTO);
+
+        Long codigoProduto = prompt().nextLong();
+        final Produto produto = produtos.stream().filter(p -> p.getCodigo().equals(codigoProduto)).findFirst()
+                .orElse(null);
+        try {
+            factory.criar(cliente).removerItem(produto);
+        } catch (Exception ex) {
+            imprimirMensagem(ex.getMessage());
+        }
+
+        if (!factory.criar(cliente).getItens().isEmpty()) {
+            imprimirMensagem(MensagemEnum.REMOVER_ITEM);
+            String resposta = prompt().next();
+
+            if (resposta.equalsIgnoreCase("S")) {
+                removerItem(factory, cliente);
+            }
+        }else{
+            factory.invalidar(cliente);
+        }
+
+    }
+
+    private void resumoDosCarrinhos(CarrinhoComprasFactory factory) {
 
         linhaEmBranco();
         linhaTracejada();
@@ -177,7 +215,6 @@ public class CompraService implements ICompra {
             linhaEmBranco();
 
             factory.invalidar(cliente);
-            // isSairDaAplicacao(factory);
 
             return true;
         }

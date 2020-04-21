@@ -51,6 +51,7 @@ public class CarrinhoCompras {
      *         false caso o produto não exista no carrinho.
      */
     public boolean removerItem(Produto produto) {
+        validaProduto(produto);
         return items.removeIf(i -> i.getProduto() == produto);
     }
 
@@ -90,9 +91,7 @@ public class CarrinhoCompras {
     }
 
     public void validaItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
-        if (produto == null) {
-            throw new ItemException("ERRO: [Produto nao encontrado com o código informado]");
-        }
+        validaProduto(produto);
 
         if (quantidade <= 0) {
             throw new ItemException("ERRO: [A quantidade deve ter um valor inteiro maior que zero]");
@@ -101,6 +100,12 @@ public class CarrinhoCompras {
 
         if (valorUnitario.signum() <= 0) {
             throw new ItemException("ERRO: [O preço unitário deve ser um valor maior que zero]");
+        }
+    }
+
+    public void validaProduto(Produto produto) {
+        if (produto == null) {
+            throw new ItemException("ERRO: [Produto nao encontrado com o código informado]");
         }
     }
 
