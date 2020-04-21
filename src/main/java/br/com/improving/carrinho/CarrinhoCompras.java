@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.improving.enumerates.MensagemErroEnum;
+import br.com.improving.carrinho.enumerates.MensagemErroEnum;
 
 /**
  * Classe que representa o carrinho de compras de um cliente.

@@ -1,6 +1,6 @@
 package br.com.improving.carrinho;
 
-import br.com.improving.enumerates.MensagemErroEnum;
+import br.com.improving.carrinho.enumerates.MensagemErroEnum;
 
 /**
  * Classe de exceção de um item

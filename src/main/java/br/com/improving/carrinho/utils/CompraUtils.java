@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.com.improving.carrinho.Produto;
-import br.com.improving.enumerates.MensagemEnum;
-import br.com.improving.enumerates.MensagemErroEnum;
+import br.com.improving.carrinho.enumerates.MensagemEnum;
+import br.com.improving.carrinho.enumerates.MensagemErroEnum;
 
 /**
  * Classe utils para fornecer alguns métodos de leitura e exibição de mensagens.

@@ -1,4 +1,4 @@
-package br.com.improving.enumerates;
+package br.com.improving.carrinho.enumerates;
 
 /**
  * Enum com mensagens diversas

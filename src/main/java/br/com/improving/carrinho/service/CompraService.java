@@ -1,27 +1,27 @@
 package br.com.improving.carrinho.service;
 
+import static br.com.improving.carrinho.enumerates.MensagemEnum.CONFIGURACAO_SESSAO;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.CONFIRMAR_CANCELAR_COMPRA;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.DESEJA_CONTINUAR_COMPRANDO;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.DIGITE_A_QUANTIDADE;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.DIGITE_CODIGO_DO_PRODUTO;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.DIGITE_NOME_CLIENTE;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.DIGITE_O_PRECO;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.MEDIA_DO_VALOR_DOS_CARRINHOS;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.NAO_HA_CARRINHO_COM_COMPRAS;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.PARA_ALTERAR_2;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.PARA_CANCELAR_3;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.PARA_CONFIRMAR_1;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.RESUMO_DOS_CARRINHOS;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.SAIR_DA_APLICACAO;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.SESSAO_EXPIROU;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.TOTAL_DO_PEDIDO;
+import static br.com.improving.carrinho.enumerates.MensagemEnum.VALOR_INCORRETO_DA_SESSAO;
 import static br.com.improving.carrinho.utils.CompraUtils.imprimirMensagem;
 import static br.com.improving.carrinho.utils.CompraUtils.linhaEmBranco;
 import static br.com.improving.carrinho.utils.CompraUtils.linhaTracejada;
 import static br.com.improving.carrinho.utils.CompraUtils.listaProdutos;
 import static br.com.improving.carrinho.utils.CompraUtils.prompt;
-import static br.com.improving.enumerates.MensagemEnum.CONFIGURACAO_SESSAO;
-import static br.com.improving.enumerates.MensagemEnum.CONFIRMAR_CANCELAR_COMPRA;
-import static br.com.improving.enumerates.MensagemEnum.DESEJA_CONTINUAR_COMPRANDO;
-import static br.com.improving.enumerates.MensagemEnum.DIGITE_A_QUANTIDADE;
-import static br.com.improving.enumerates.MensagemEnum.DIGITE_CODIGO_DO_PRODUTO;
-import static br.com.improving.enumerates.MensagemEnum.DIGITE_NOME_CLIENTE;
-import static br.com.improving.enumerates.MensagemEnum.DIGITE_O_PRECO;
-import static br.com.improving.enumerates.MensagemEnum.MEDIA_DO_VALOR_DOS_CARRINHOS;
-import static br.com.improving.enumerates.MensagemEnum.NAO_HA_CARRINHO_COM_COMPRAS;
-import static br.com.improving.enumerates.MensagemEnum.PARA_ALTERAR_2;
-import static br.com.improving.enumerates.MensagemEnum.PARA_CANCELAR_3;
-import static br.com.improving.enumerates.MensagemEnum.PARA_CONFIRMAR_1;
-import static br.com.improving.enumerates.MensagemEnum.RESUMO_DOS_CARRINHOS;
-import static br.com.improving.enumerates.MensagemEnum.SAIR_DA_APLICACAO;
-import static br.com.improving.enumerates.MensagemEnum.SESSAO_EXPIROU;
-import static br.com.improving.enumerates.MensagemEnum.TOTAL_DO_PEDIDO;
-import static br.com.improving.enumerates.MensagemEnum.VALOR_INCORRETO_DA_SESSAO;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -33,9 +33,9 @@ import java.util.Scanner;
 import br.com.improving.carrinho.CarrinhoComprasFactory;
 import br.com.improving.carrinho.ItemException;
 import br.com.improving.carrinho.Produto;
+import br.com.improving.carrinho.enumerates.MensagemEnum;
+import br.com.improving.carrinho.enumerates.MensagemErroEnum;
 import br.com.improving.carrinho.utils.ProdutoDbUtils;
-import br.com.improving.enumerates.MensagemEnum;
-import br.com.improving.enumerates.MensagemErroEnum;
 
 /*
 * Classe responsável por realizar toda a movimentação de compras de um ou mais carrinhos.
