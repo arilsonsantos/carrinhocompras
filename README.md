@@ -7,16 +7,11 @@ A prova deve ser resolvida utilizando obrigatoriamente Java 8. Não será necess
 Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução seja aprovada. Sua prova precisa compilar via Maven, impreterivelmente - não basta rodar apenas via sua IDE.
 
 ---
-### Instruções de uso da applicação Carrinho de Compras.
+### Instruções para a execução da aplicação Carrinho de Compras.
 
-##### 1) No diretório da aplicação, digite a instrução abaixo:
+##### 1) No diretório da aplicação, digite a instrução abaixo e siga as instruções:
 
  <kbd>mvn package exec:java</kbd> 
 
-!teste1  
-!!teste2  
-!!!teste3  
-!!!!teste4  
-
-Este é um {c:#B81365}texto colorido com hexadecimal{/c} 
-[size=50][fa=check-circle /] Tamanho 50[/size]
+#### Fluxograma:
+![Logo](./documentacao/carrinho-de-compras-retrato.png)
