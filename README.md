@@ -94,7 +94,7 @@ Sai da aplicação
 ### Instruções para a execução da aplicação Carrinho de Compras.
 
 ##### 1) Para primeira execução, no diretório da aplicação, digite a instrução abaixo:  
- <kbd>mvn package exec:java</kbd> 
+***mvn package exec:java***
 
 ##### 2) Para as próximas execuções, no diretório da aplicação, digite a instrução abaixo:  
- <kbd>mvn exec:java</kbd> 
+ ***mvn exec:java***
