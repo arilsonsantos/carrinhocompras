@@ -6,14 +6,9 @@ A prova deve ser resolvida utilizando obrigatoriamente Java 8. Não será necess
 
 Todos os requisitos funcionais tem que ser atendidos 100% para que sua solução seja aprovada. Sua prova precisa compilar via Maven, impreterivelmente - não basta rodar apenas via sua IDE.  
 
-
 ---
   
-  
 **Documentação e instruções para uso da aplicação Carrinho de Compras**
-
-
-
 
 #### Fluxograma:
 
@@ -88,6 +83,11 @@ Restou o carrinho do Joao com o prdouto 1
 Sai da aplicação  
 ![v-05](./documentacao/05-remover-itens-carrinho-vazio.gif)
 
+
+#### 5. Removendo produtos do carrinho 
+Inicia uma compra 
+Preenche dados com valores inválidos
+![v-06](./documentacao/06-excecoes.gif)
 
 ---
 
