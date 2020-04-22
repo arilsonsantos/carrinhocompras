@@ -84,7 +84,7 @@ Sai da aplicação
 ![v-05](./documentacao/05-remover-itens-carrinho-vazio.gif)
 
 
-#### 5. Removendo produtos do carrinho 
+#### 6. Inserindo valores inválidos 
 Inicia uma compra 
 Preenche dados com valores inválidos
 ![v-06](./documentacao/06-excecoes.gif)
