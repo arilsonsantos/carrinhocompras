@@ -45,9 +45,9 @@ public class CarrinhoComprasFactory {
                 BigDecimal::add);
 
         BigDecimal valorTicketMedio = somaTotal.divide(new BigDecimal(clienteCarrinho.size()), 4,
-                RoundingMode.HALF_EVEN);
+                RoundingMode.HALF_UP);
 
-        valorTicketMedio = valorTicketMedio.setScale(2, RoundingMode.HALF_EVEN);
+        valorTicketMedio = valorTicketMedio.setScale(2, RoundingMode.HALF_UP);
 
         return valorTicketMedio;
     }
